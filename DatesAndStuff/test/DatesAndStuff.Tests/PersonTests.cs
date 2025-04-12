@@ -67,7 +67,7 @@ public class PersonTests
             sut.IncreaseSalary(increasePercentage);
 
             // Assert
-            Assert.AreEqual(expectedSalary, sut.Salary);
+            sut.Salary.Should().Be(expectedSalary);
         }
 
         [Test]
@@ -76,13 +76,12 @@ public class PersonTests
             // Arrange
             double currentSalary = sut.Salary;
             double increasePercentage = 0;
-            double expectedSalary = currentSalary * (1 + increasePercentage / 100);
 
             // Act
             sut.IncreaseSalary(increasePercentage);
 
             // Assert
-            Assert.AreEqual(expectedSalary, sut.Salary);
+            sut.Salary.Should().Be(currentSalary);
         }
 
         [Test]
@@ -96,7 +95,7 @@ public class PersonTests
             sut.IncreaseSalary(increasePercentage);
 
             // Assert
-            Assert.Less(sut.Salary, currentSalary);
+            sut.Salary.Should().BeLessThan(currentSalary);
         }
 
         [Test]
@@ -107,11 +106,11 @@ public class PersonTests
             double increasePercentage = -15;
             double expectedSalary = currentSalary * (1 + increasePercentage / 100);
 
-            // Act
-            sut.IncreaseSalary(increasePercentage);
+            // Act 
+            Action act = () => sut.IncreaseSalary(increasePercentage);
 
             // Assert
-            Assert.AreNotEqual(expectedSalary, sut.Salary);
+            act.Should().Throw<ArgumentOutOfRangeException>();
         }
     }
 }
