@@ -1,116 +1,114 @@
-﻿using FluentAssertions;
+﻿using AutoFixture;
+using AutoFixture.NUnit3;
+using FluentAssertions;
 
 namespace DatesAndStuff.Tests;
 
 public class PersonTests
 {
-    Person sut;
-
     [SetUp]
     public void Setup()
     {
-        this.sut = new Person("Test Pista", 54);
     }
 
-    public class GotMerriedTests : PersonTests
+    [Test]
+    public void GotMerried_First_NameShouldChange()
     {
-        [Test]
-        public void First_NameShouldChange()
-        {
-            // Arrange
-            string newName = "Test-Eleso Pista";
-            double salaryBeforeMarriage = sut.Salary;
-            var beforeChanges = Person.Clone(sut);
+        // Arrange
+        var sut = PersonFactory.CreateTestPerson();
 
-            // Act
-            sut.GotMarried(newName);
+        string newName = "Test-Eleso Pista";
+        double salaryBeforeMarriage = sut.Salary;
+        var beforeChanges = Person.Clone(sut);
 
-            // Assert
-            Assert.That(sut.Name, Is.EqualTo(newName)); // act = exp
+        // Act
+        sut.GotMarried(newName);
 
-            sut.Name.Should().Be(newName);
-            sut.Should().BeEquivalentTo(beforeChanges, o => o.Excluding(p => p.Name));
+        // Assert
+        Assert.That(sut.Name, Is.EqualTo(newName)); // act = exp
 
-            //sut.Salary.Should().Be(salaryBeforeMarriage);
+        sut.Name.Should().Be(newName);
+        sut.Should().BeEquivalentTo(beforeChanges, o => o.Excluding(p => p.Name));
 
-            //Assert.AreEqual(newName, sut.Name); // = (exp, act)
-            //Assert.AreEqual(salaryBeforeMarriage, sut.Salary);
-        }
+        //sut.Salary.Should().Be(salaryBeforeMarriage);
 
-        [Test]
-        public void Second_ShouldFail()
-        {
-            // Arrange
-            string newName = "Test-Eleso-Felallo Pista";
-            sut.GotMarried("");
-
-            // Act
-            var task = Task.Run(() => sut.GotMarried(""));
-            try { task.Wait(); } catch { }
-
-            // Assert
-            Assert.IsTrue(task.IsFaulted);
-        }
+        //Assert.AreEqual(newName, sut.Name); // = (exp, act)
+        //Assert.AreEqual(salaryBeforeMarriage, sut.Salary);
     }
 
-    public class IncreaseSalaryTests : PersonTests
+    [Test]
+    public void GotMerried_Second_ShouldFail()
     {
-        [Test]
-        public void PositiveIncrease_ShouldIncrease()
-        {
-            // Arrange
-            double currentSalary = sut.Salary;
-            double increasePercentage = 10;
-            double expectedSalary = currentSalary * (1 + increasePercentage / 100);
+        // Arrange
+        var fixture = new AutoFixture.Fixture();
+        fixture.Customize<IPaymentService>(c => c.FromFactory(() => new TestPaymentService()));
 
-            // Act
-            sut.IncreaseSalary(increasePercentage);
+        var sut = fixture.Create<Person>();
 
-            // Assert
-            sut.Salary.Should().Be(expectedSalary);
-        }
+        string newName = "Test-Eleso-Felallo Pista";
+        sut.GotMarried("");
 
-        [Test]
-        public void ZeroPercentIncrease_ShouldNotChange()
-        {
-            // Arrange
-            double currentSalary = sut.Salary;
-            double increasePercentage = 0;
+        // Act
+        var task = Task.Run(() => sut.GotMarried(""));
+        try { task.Wait(); } catch { }
 
-            // Act
-            sut.IncreaseSalary(increasePercentage);
+        // Assert
+        Assert.IsTrue(task.IsFaulted);
+    }
 
-            // Assert
-            sut.Salary.Should().Be(currentSalary);
-        }
+    [Test]
+    [CustomPersonCreationAutodataAttribute]
+    public void IncreaseSalary_ReasonableValue_ShouldModifySalary(Person sut, double salaryIncreasePercentage)
+    {
+        // Arrange
+        double initialSalary = sut.Salary;
 
-        [Test]
-        public void NegativeIncrease_ShouldDecrease()
-        {
-            // Arrange
-            double currentSalary = sut.Salary;
-            double increasePercentage = -5;
+        // Act
+        sut.IncreaseSalary(salaryIncreasePercentage);
 
-            // Act
-            sut.IncreaseSalary(increasePercentage);
+        // Assert
+        sut.Salary.Should().BeApproximately(initialSalary * (100 + salaryIncreasePercentage) / 100, Math.Pow(10, -8), because: "numerical salary calculation might be rounded to conform legal stuff");
+    }
 
-            // Assert
-            sut.Salary.Should().BeLessThan(currentSalary);
-        }
+    [Test]
+    public void Constructor_DefaultParams_ShouldBeAbleToEatChocolate()
+    {
+        // Arrange
 
-        [Test]
-        public void SmallerThanMinusTenPerc_ShouldFail()
-        {
-            // Arrange
-            double currentSalary = sut.Salary;
-            double increasePercentage = -15;
-            double expectedSalary = currentSalary * (1 + increasePercentage / 100);
+        // Act
+        Person sut = PersonFactory.CreateTestPerson();
 
-            // Act 
-            Action act = () => sut.IncreaseSalary(increasePercentage);
+        // Assert
+        sut.CanEatChocolate.Should().BeTrue();
+    }
 
-            // Assert
-            act.Should().Throw<ArgumentOutOfRangeException>();
-        }
+    [Test]
+    public void Constructor_DontLikeChocolate_ShouldNotBeAbleToEatChocolate()
+    {
+        // Arrange
+
+        // Act
+        Person sut = PersonFactory.CreateTestPerson(fp => fp.CanEatChocolate = false);
+
+        // Assert
+        sut.CanEatChocolate.Should().BeFalse();
+    }
+
+    [Test]
+    public void IncreaseSalary_ZeroPercentIncrease_ShouldNotChange()
+    {
+        throw new NotImplementedException();
+    }
+
+    [Test]
+    public void IncreaseSalary_NegativeIncrease_ShouldDecrease()
+    {
+        throw new NotImplementedException();
+    }
+
+    [Test]
+    public void IncreaseSalary_SmallerThanMinusTenPerc_ShouldFail()
+    {
+        throw new NotImplementedException();
     }
 }
