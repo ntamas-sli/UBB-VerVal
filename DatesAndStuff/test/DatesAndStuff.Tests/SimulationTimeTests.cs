@@ -31,7 +31,7 @@ namespace DatesAndStuff.Tests
             throw new NotImplementedException();
         }
 
-        [Test]
+ 
         // equal
         // not equal
         // <
@@ -42,9 +42,23 @@ namespace DatesAndStuff.Tests
         // >= same
         // max
         // min
-        public void CompareSimulatedTime_TwoSimulatedTimesBeingEvaluatedWithAnOp_ReturnsExcpectedResult()
+        public class CompareSimulationTimeTests
         {
-            throw new NotImplementedException();
+            [Test]
+            public void Equal_ReturnsIfTheyAreEqual()
+            {
+                // Arrange
+                DateTime time1 = new DateTime(2020, 8, 21, 5, 4, 49);
+                DateTime time2 = new DateTime(2020, 8, 21, 5, 4, 49);
+
+                SimulationTime sut1 = new SimulationTime(time1);
+                SimulationTime sut2 = new SimulationTime(time2);
+
+                // Act
+
+                // Assert
+                Assert.AreEqual(sut1, sut2);
+            }
         }
 
         private class TimeSpanArithmeticTests
