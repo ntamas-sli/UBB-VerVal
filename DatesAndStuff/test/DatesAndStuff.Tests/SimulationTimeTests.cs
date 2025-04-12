@@ -87,7 +87,7 @@ namespace DatesAndStuff.Tests
 
         [Test]
         // simulation difference timespane and datetimetimespan is the same
-        public void SimulationTime_SimSubtractingSimulationTime_SimulationTimeIsReduced()
+        public void SimulationTime_SubtractingSimulationTime_SimulationTimeIsReduced()
         {
             throw new NotImplementedException();
         }
@@ -107,26 +107,29 @@ namespace DatesAndStuff.Tests
             //Assert.AreEqual(t1.TotalMilliseconds + 1, t1.NextMillisec.TotalMilliseconds);
             throw new NotImplementedException();
         }
-
-        [Test]
-        // creat a SimulationTime from a DateTime, add the same milliseconds to both and check if they are still equal
-        public void DateTime_CreatingSimulationTimeFromDateTime_MillisecondIsAddedToBothAndCheckedIfEqual()
+        public class CreateSimulationTimeFromDateTime
         {
-            throw new NotImplementedException();
-        }
+            [Test]
+            // creat a SimulationTime from a DateTime, add the same milliseconds to both and check if they are still equal
+            public void DateTime_CreatingSimulationTimeFromDateTime_MillisecondIsAddedToBothAndCheckedIfEqual()
+            {
+                throw new NotImplementedException();
+            }
 
-        [Test]
-        // the same as before just with seconds
-        public void DateTime_CreatingSimulationTimeFromDateTime_SecondIsAddedToBothAndCheckedIfEqual()
-        {
-            throw new NotImplementedException();
-        }
+            [Test]
+            // the same as before just with seconds
+            public void DateTime_CreatingSimulationTimeFromDateTime_SecondIsAddedToBothAndCheckedIfEqual()
+            {
+                throw new NotImplementedException();
+            }
 
-        [Test]
-        // same as before just with timespan
-        public void DateTimeToSimulationTime_ShouldConvertDateTimeToSimulationTime_ThenCompareThemByTimeSpan()
-        {
-            throw new NotImplementedException();
+            [Test]
+            // same as before just with timespan
+            public void DateTimeToSimulationTime_ShouldConvertDateTimeToSimulationTime_ThenCompareThemByTimeSpan()
+            {
+                throw new NotImplementedException();
+            }
+
         }
 
         [Test]
