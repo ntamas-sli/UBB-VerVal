@@ -58,25 +58,60 @@ public class PersonTests
         [Test]
         public void PositiveIncrease_ShouldIncrease()
         {
-            throw new NotImplementedException();
+            // Arrange
+            double currentSalary = sut.Salary;
+            double increasePercentage = 10;
+            double expectedSalary = currentSalary * (1 + increasePercentage / 100);
+
+            // Act
+            sut.IncreaseSalary(increasePercentage);
+
+            // Assert
+            Assert.AreEqual(expectedSalary, sut.Salary);
         }
 
         [Test]
         public void ZeroPercentIncrease_ShouldNotChange()
         {
-            throw new NotImplementedException();
+            // Arrange
+            double currentSalary = sut.Salary;
+            double increasePercentage = 0;
+            double expectedSalary = currentSalary * (1 + increasePercentage / 100);
+
+            // Act
+            sut.IncreaseSalary(increasePercentage);
+
+            // Assert
+            Assert.AreEqual(expectedSalary, sut.Salary);
         }
 
         [Test]
         public void NegativeIncrease_ShouldDecrease()
         {
-            throw new NotImplementedException();
+            // Arrange
+            double currentSalary = sut.Salary;
+            double increasePercentage = -5;
+
+            // Act
+            sut.IncreaseSalary(increasePercentage);
+
+            // Assert
+            Assert.Less(sut.Salary, currentSalary);
         }
 
         [Test]
         public void SmallerThanMinusTenPerc_ShouldFail()
         {
-            throw new NotImplementedException();
+            // Arrange
+            double currentSalary = sut.Salary;
+            double increasePercentage = -15;
+            double expectedSalary = currentSalary * (1 + increasePercentage / 100);
+
+            // Act
+            sut.IncreaseSalary(increasePercentage);
+
+            // Assert
+            Assert.AreNotEqual(expectedSalary, sut.Salary);
         }
     }
 }
