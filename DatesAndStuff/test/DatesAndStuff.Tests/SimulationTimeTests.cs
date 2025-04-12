@@ -110,28 +110,28 @@ namespace DatesAndStuff.Tests
 
         [Test]
         // creat a SimulationTime from a DateTime, add the same milliseconds to both and check if they are still equal
-        public void SimulationTime_CreatingSimulationTimeFromDateTime_DateTimeIsConvertedToSimulationTime()
+        public void DateTime_CreatingSimulationTimeFromDateTime_MillisecondIsAddedToBothAndCheckedIfEqual()
         {
             throw new NotImplementedException();
         }
 
         [Test]
         // the same as before just with seconds
-        public void _AddSeconds()
+        public void DateTime_CreatingSimulationTimeFromDateTime_SecondIsAddedToBothAndCheckedIfEqual()
         {
             throw new NotImplementedException();
         }
 
         [Test]
         // same as before just with timespan
-        public void SimulationTime_AddTimeSpan()
+        public void DateTimeToSimulationTime_ShouldConvertDateTimeToSimulationTime_ThenCompareThemByTimeSpan()
         {
             throw new NotImplementedException();
         }
 
         [Test]
         // check string representation given by ToString
-        public void SimulationTime_ToString()
+        public void SimulationTime_WhenSimulationTimeToStringIsUsed_ThenCheckRepresentaionGivenAsAResult()
         {
             throw new NotImplementedException();
         }
