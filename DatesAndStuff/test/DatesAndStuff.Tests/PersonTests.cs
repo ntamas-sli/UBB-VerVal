@@ -59,19 +59,7 @@ public class PersonTests
         }
     }
 
-    [Test]
-    [CustomPersonCreationAutodataAttribute]
-    public void IncreaseSalary_ReasonableValue_ShouldModifySalary(Person sut, double salaryIncreasePercentage)
-    {
-        // Arrange
-        double initialSalary = sut.Salary;
-
-        // Act
-        sut.IncreaseSalary(salaryIncreasePercentage);
-
-        // Assert
-        sut.Salary.Should().BeApproximately(initialSalary * (100 + salaryIncreasePercentage) / 100, Math.Pow(10, -8), because: "numerical salary calculation might be rounded to conform legal stuff");
-    }
+    
 
     [Test]
     public void Constructor_DefaultParams_ShouldBeAbleToEatChocolate()
@@ -101,50 +89,22 @@ public class PersonTests
 
     public class IncreaseSalaryTests
     {
-        [Test]
-        public void PositiveIncrease_ShouldIncrease()
+        [TestCase(10)]
+        [TestCase(0)]
+        [TestCase(-5)]
+        public void IncreaseSalary_ReasonableValue_ShouldModifySalary(double salaryIncreasePercentage)
         {
             // Arrange
-            var sut = PersonFactory.CreateTestPerson();
-            double currentSalary = sut.Salary;
-            double increasePercentage = 10;
-            double expectedSalary = currentSalary * (1 + increasePercentage / 100);
+            var fixture = new AutoFixture.Fixture();
+            fixture.Customize<IPaymentService>(c => c.FromFactory(() => new TestPaymentService()));
+            var sut = fixture.Create<Person>();
+            double initialSalary = sut.Salary;
 
             // Act
-            sut.IncreaseSalary(increasePercentage);
+            sut.IncreaseSalary(salaryIncreasePercentage);
 
             // Assert
-            sut.Salary.Should().Be(expectedSalary);
-        }
-
-        [Test]
-        public void ZeroPercentIncrease_ShouldNotChange()
-        {
-            // Arrange
-            var sut = PersonFactory.CreateTestPerson();
-            double currentSalary = sut.Salary;
-            double increasePercentage = 0;
-
-            // Act
-            sut.IncreaseSalary(increasePercentage);
-
-            // Assert
-            sut.Salary.Should().Be(currentSalary);
-        }
-
-        [Test]
-        public void NegativeIncrease_ShouldDecrease()
-        {
-            // Arrange
-            var sut = PersonFactory.CreateTestPerson();
-            double currentSalary = sut.Salary;
-            double increasePercentage = -5;
-
-            // Act
-            sut.IncreaseSalary(increasePercentage);
-
-            // Assert
-            sut.Salary.Should().BeLessThan(currentSalary);
+            sut.Salary.Should().BeApproximately(initialSalary * (100 + salaryIncreasePercentage) / 100, Math.Pow(10, -8), because: "numerical salary calculation might be rounded to conform legal stuff");
         }
 
         [Test]
