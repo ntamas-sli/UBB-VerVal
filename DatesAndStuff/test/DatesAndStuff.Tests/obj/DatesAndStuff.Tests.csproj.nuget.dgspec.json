@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Koli\\Munka\\BBTE\\Tantargyak\\Verifikacio es validacio (MLM5014)\\Kodok\\VerVal-MLM5014\\Szeminarium\\Elok\\Kedd16-ptln\\VerVal\\DatesAndStuff\\test\\DatesAndStuff.Tests\\DatesAndStuff.Tests.csproj": {}
+    "C:\\OtherStuff\\UBB 3.2\\VerVal\\Lab1\\UBB-VerVal\\DatesAndStuff\\test\\DatesAndStuff.Tests\\DatesAndStuff.Tests.csproj": {}
   },
   "projects": {
-    "D:\\Koli\\Munka\\BBTE\\Tantargyak\\Verifikacio es validacio (MLM5014)\\Kodok\\VerVal-MLM5014\\Szeminarium\\Elok\\Kedd16-ptln\\VerVal\\DatesAndStuff\\src\\DatesAndStuff\\DatesAndStuff.csproj": {
+    "C:\\OtherStuff\\UBB 3.2\\VerVal\\Lab1\\UBB-VerVal\\DatesAndStuff\\src\\DatesAndStuff\\DatesAndStuff.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Koli\\Munka\\BBTE\\Tantargyak\\Verifikacio es validacio (MLM5014)\\Kodok\\VerVal-MLM5014\\Szeminarium\\Elok\\Kedd16-ptln\\VerVal\\DatesAndStuff\\src\\DatesAndStuff\\DatesAndStuff.csproj",
+        "projectUniqueName": "C:\\OtherStuff\\UBB 3.2\\VerVal\\Lab1\\UBB-VerVal\\DatesAndStuff\\src\\DatesAndStuff\\DatesAndStuff.csproj",
         "projectName": "DatesAndStuff",
-        "projectPath": "D:\\Koli\\Munka\\BBTE\\Tantargyak\\Verifikacio es validacio (MLM5014)\\Kodok\\VerVal-MLM5014\\Szeminarium\\Elok\\Kedd16-ptln\\VerVal\\DatesAndStuff\\src\\DatesAndStuff\\DatesAndStuff.csproj",
-        "packagesPath": "C:\\Users\\kolum\\.nuget\\packages\\",
-        "outputPath": "D:\\Koli\\Munka\\BBTE\\Tantargyak\\Verifikacio es validacio (MLM5014)\\Kodok\\VerVal-MLM5014\\Szeminarium\\Elok\\Kedd16-ptln\\VerVal\\DatesAndStuff\\src\\DatesAndStuff\\obj\\",
+        "projectPath": "C:\\OtherStuff\\UBB 3.2\\VerVal\\Lab1\\UBB-VerVal\\DatesAndStuff\\src\\DatesAndStuff\\DatesAndStuff.csproj",
+        "packagesPath": "C:\\Users\\Nagy Tamás\\.nuget\\packages\\",
+        "outputPath": "C:\\OtherStuff\\UBB 3.2\\VerVal\\Lab1\\UBB-VerVal\\DatesAndStuff\\src\\DatesAndStuff\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\kolum\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Nagy Tamás\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -27,14 +27,7 @@
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "C:\\Program Files\\dotnet\\library-packs": {},
-          "C:\\Users\\kolum\\.nuget\\repository": {},
-          "https://api.nuget.org/v3/index.json": {},
-          "https://nexus.kilgray.com/repository/kilgray-nuget-dev-sandbox/": {},
-          "https://nexus.kilgray.com/repository/kilgray-private-nuget-release/": {},
-          "https://nexus.kilgray.com/repository/kilgray-private-nuget-snapshot/": {},
-          "https://nexus.kilgray.com/repository/memoq-nuget-debug/": {},
-          "https://nexus.kilgray.com/repository/memoq-nuget-release/": {},
-          "https://nexus.kilgray.com/repository/memoq-nuget-sandbox/": {}
+          "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net8.0": {
@@ -50,9 +43,8 @@
         "restoreAuditProperties": {
           "enableAudit": "true",
           "auditLevel": "low",
-          "auditMode": "all"
-        },
-        "SdkAnalysisLevel": "9.0.100"
+          "auditMode": "direct"
+        }
       },
       "frameworks": {
         "net8.0": {
@@ -73,24 +65,24 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.100/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.203/PortableRuntimeIdentifierGraph.json"
         }
       }
     },
-    "D:\\Koli\\Munka\\BBTE\\Tantargyak\\Verifikacio es validacio (MLM5014)\\Kodok\\VerVal-MLM5014\\Szeminarium\\Elok\\Kedd16-ptln\\VerVal\\DatesAndStuff\\test\\DatesAndStuff.Tests\\DatesAndStuff.Tests.csproj": {
+    "C:\\OtherStuff\\UBB 3.2\\VerVal\\Lab1\\UBB-VerVal\\DatesAndStuff\\test\\DatesAndStuff.Tests\\DatesAndStuff.Tests.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Koli\\Munka\\BBTE\\Tantargyak\\Verifikacio es validacio (MLM5014)\\Kodok\\VerVal-MLM5014\\Szeminarium\\Elok\\Kedd16-ptln\\VerVal\\DatesAndStuff\\test\\DatesAndStuff.Tests\\DatesAndStuff.Tests.csproj",
+        "projectUniqueName": "C:\\OtherStuff\\UBB 3.2\\VerVal\\Lab1\\UBB-VerVal\\DatesAndStuff\\test\\DatesAndStuff.Tests\\DatesAndStuff.Tests.csproj",
         "projectName": "DatesAndStuff.Tests",
-        "projectPath": "D:\\Koli\\Munka\\BBTE\\Tantargyak\\Verifikacio es validacio (MLM5014)\\Kodok\\VerVal-MLM5014\\Szeminarium\\Elok\\Kedd16-ptln\\VerVal\\DatesAndStuff\\test\\DatesAndStuff.Tests\\DatesAndStuff.Tests.csproj",
-        "packagesPath": "C:\\Users\\kolum\\.nuget\\packages\\",
-        "outputPath": "D:\\Koli\\Munka\\BBTE\\Tantargyak\\Verifikacio es validacio (MLM5014)\\Kodok\\VerVal-MLM5014\\Szeminarium\\Elok\\Kedd16-ptln\\VerVal\\DatesAndStuff\\test\\DatesAndStuff.Tests\\obj\\",
+        "projectPath": "C:\\OtherStuff\\UBB 3.2\\VerVal\\Lab1\\UBB-VerVal\\DatesAndStuff\\test\\DatesAndStuff.Tests\\DatesAndStuff.Tests.csproj",
+        "packagesPath": "C:\\Users\\Nagy Tamás\\.nuget\\packages\\",
+        "outputPath": "C:\\OtherStuff\\UBB 3.2\\VerVal\\Lab1\\UBB-VerVal\\DatesAndStuff\\test\\DatesAndStuff.Tests\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\kolum\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Nagy Tamás\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -100,21 +92,14 @@
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "C:\\Program Files\\dotnet\\library-packs": {},
-          "C:\\Users\\kolum\\.nuget\\repository": {},
-          "https://api.nuget.org/v3/index.json": {},
-          "https://nexus.kilgray.com/repository/kilgray-nuget-dev-sandbox/": {},
-          "https://nexus.kilgray.com/repository/kilgray-private-nuget-release/": {},
-          "https://nexus.kilgray.com/repository/kilgray-private-nuget-snapshot/": {},
-          "https://nexus.kilgray.com/repository/memoq-nuget-debug/": {},
-          "https://nexus.kilgray.com/repository/memoq-nuget-release/": {},
-          "https://nexus.kilgray.com/repository/memoq-nuget-sandbox/": {}
+          "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "D:\\Koli\\Munka\\BBTE\\Tantargyak\\Verifikacio es validacio (MLM5014)\\Kodok\\VerVal-MLM5014\\Szeminarium\\Elok\\Kedd16-ptln\\VerVal\\DatesAndStuff\\src\\DatesAndStuff\\DatesAndStuff.csproj": {
-                "projectPath": "D:\\Koli\\Munka\\BBTE\\Tantargyak\\Verifikacio es validacio (MLM5014)\\Kodok\\VerVal-MLM5014\\Szeminarium\\Elok\\Kedd16-ptln\\VerVal\\DatesAndStuff\\src\\DatesAndStuff\\DatesAndStuff.csproj"
+              "C:\\OtherStuff\\UBB 3.2\\VerVal\\Lab1\\UBB-VerVal\\DatesAndStuff\\src\\DatesAndStuff\\DatesAndStuff.csproj": {
+                "projectPath": "C:\\OtherStuff\\UBB 3.2\\VerVal\\Lab1\\UBB-VerVal\\DatesAndStuff\\src\\DatesAndStuff\\DatesAndStuff.csproj"
               }
             }
           }
@@ -127,9 +112,8 @@
         "restoreAuditProperties": {
           "enableAudit": "true",
           "auditLevel": "low",
-          "auditMode": "all"
-        },
-        "SdkAnalysisLevel": "9.0.100"
+          "auditMode": "direct"
+        }
       },
       "frameworks": {
         "net8.0": {
@@ -188,7 +172,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.100/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.203/PortableRuntimeIdentifierGraph.json"
         }
       }
     }
