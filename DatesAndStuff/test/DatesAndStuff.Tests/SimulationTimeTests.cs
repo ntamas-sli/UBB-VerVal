@@ -1,3 +1,5 @@
+using FluentAssertions;
+
 namespace DatesAndStuff.Tests
 {
     public sealed class SimulationTimeTests
@@ -26,12 +28,19 @@ namespace DatesAndStuff.Tests
 
         [Test]
         // Default time is not current time.
-        public void SimulationTime_Construction()
+        public void SimulationTime_WhenCreated_DefaultIsNotCurrentTime()
         {
-            throw new NotImplementedException();
+            // Arrange
+            DateTime currentTime = DateTime.Now;
+            SimulationTime sut = new SimulationTime(currentTime);
+
+            // Act
+            var result = sut.ToAbsoluteDateTime();
+
+            // Assert
+            Assert.AreNotEqual(currentTime, result);
         }
 
-        [Test]
         // equal
         // not equal
         // <
@@ -42,9 +51,24 @@ namespace DatesAndStuff.Tests
         // >= same
         // max
         // min
-        public void SimulationTime_Op()
+        public class CompareSimulationTimeTests
         {
-            throw new NotImplementedException();
+            [Test]
+            public void Equal_ChecksEquality()
+            {
+                // Arrange
+                DateTime time1 = new DateTime(2020, 8, 21, 5, 4, 49);
+                DateTime time2 = new DateTime(2020, 8, 21, 5, 4, 49);
+
+                SimulationTime sut1 = new SimulationTime(time1);
+                SimulationTime sut2 = new SimulationTime(time2);
+
+                // Act
+
+                // Assert
+                sut1.Should().Be(sut2);
+                //Assert.AreEqual(sut1, sut2);
+            }
         }
 
         private class TimeSpanArithmeticTests
@@ -80,60 +104,147 @@ namespace DatesAndStuff.Tests
             {
                 // code kozelibb
                 // RegisterOrder_SignedInUserSendsOrder_OrderIsRegistered
-                throw new NotImplementedException();
+                // Arrange
+                DateTime baseDate = new DateTime(2010, 8, 23, 9, 4, 49);
+                SimulationTime sut = new SimulationTime(baseDate);
+
+                var ts = TimeSpan.FromMilliseconds(4544313);
+
+                // Act
+                var result = sut - ts;
+
+                // Assert
+                var expectedDateTime = baseDate - ts;
+                result.ToAbsoluteDateTime().Should().Be(expectedDateTime);
+                //Assert.AreEqual(expectedDateTime, result.ToAbsoluteDateTime());
             }
         }
 
 
         [Test]
         // simulation difference timespane and datetimetimespan is the same
-        public void SimulationTime_SubtractSimulationTime()
+        public void SimulationTime_SubtractingSimulationTime_SimulationTimeIsReduced()
         {
-            throw new NotImplementedException();
+            // Arrange
+            DateTime baseDate1 = new DateTime(2022, 1, 1, 10, 0, 0);
+            DateTime baseDate2 = new DateTime(2022, 1, 1, 9, 30, 0);
+            SimulationTime sut1 = new SimulationTime(baseDate1);
+            SimulationTime sut2 = new SimulationTime(baseDate2);
+            var expected = TimeSpan.FromMinutes(30);
+
+            // Act
+            var result = sut1 - sut2;
+
+            // Assert
+            //Assert.AreEqual(expected, result);
+            expected.Should().Be(result);
         }
 
         [Test]
         // millisecond representation works
-        public void SimulationTime_1msPerTick()
+        public void MillisecondRepresentation_RepresentsSimulationTimeInMilliseconds()
         {
-            //var t1 = SimulationTime.MinValue.AddMilliseconds(10);
-            throw new NotImplementedException();
+            // Arrange
+            var initialTime = SimulationTime.MinValue.AddMilliseconds(10);
+
+            // Act
+            var result = initialTime.TotalMilliseconds;
+
+            // Assert
+            result.Should().Be(10);
         }
 
         [Test]
         // next millisec calculation works
-        public void SimulationTime_NextMillisec()
+        public void SimulationTime_NextMillisecondIsRequested_MillisecondIsIncreasedByOne()
         {
-            //Assert.AreEqual(t1.TotalMilliseconds + 1, t1.NextMillisec.TotalMilliseconds);
-            throw new NotImplementedException();
+            // Arrange
+            var t1 = SimulationTime.MinValue.AddMilliseconds(10);
+
+            // Act
+            var nextMillisecond = t1.NextMillisec;
+
+            // Assert
+            nextMillisecond.TotalMilliseconds.Should().Be(t1.TotalMilliseconds + 1);
+            //Assert.AreEqual(t1.TotalMilliseconds + 1, nextMillisecond.TotalMilliseconds);
         }
 
-        [Test]
-        // creat a SimulationTime from a DateTime, add the same milliseconds to both and check if they are still equal
-        public void SimulationTime_AddMilliSeconds()
+        public class CreateSimulationTimeFromDateTime
         {
-            throw new NotImplementedException();
-        }
+            [Test]
+            // creat a SimulationTime from a DateTime, add the same milliseconds to both and check if they are still equal
+            public void DateTime_CreatingSimulationTimeFromDateTime_MillisecondIsAddedToBothAndCheckedIfEqual()
+            {
+                // Arrange
+                DateTime baseDate = new DateTime(2022, 5, 15, 8, 30, 45);
+                SimulationTime simulationTime = new SimulationTime(baseDate);
 
-        [Test]
-        // the same as before just with seconds
-        public void SimulationTime_AddSeconds()
-        {
-            throw new NotImplementedException();
-        }
+                var ts = 500;
 
-        [Test]
-        // same as before just with timespan
-        public void SimulationTime_AddTimeSpan()
-        {
-            throw new NotImplementedException();
+                // Act
+                DateTime newDateTime = baseDate.AddMilliseconds(ts);
+                SimulationTime newSimulationTime = simulationTime.AddMilliseconds(ts);
+
+                // Assert
+                newDateTime.Should().Be(newSimulationTime.ToAbsoluteDateTime());
+                //Assert.AreEqual(newDateTime, newSimulationTime.ToAbsoluteDateTime());
+            }
+
+            [Test]
+            // the same as before just with seconds
+            public void DateTime_CreatingSimulationTimeFromDateTime_SecondIsAddedToBothAndCheckedIfEqual()
+            {
+                // Arrange
+                DateTime baseDate = new DateTime(2022, 5, 15, 8, 30, 45);
+                SimulationTime simulationTime = new SimulationTime(baseDate);
+
+                var ts = 2;
+
+                // Act
+                DateTime newDateTime = baseDate.AddSeconds(ts);
+                SimulationTime newSimulationTime = simulationTime.AddSeconds(ts);
+
+                // Assert
+                newDateTime.Should().Be(newSimulationTime.ToAbsoluteDateTime());
+                //Assert.AreEqual(newDateTime, newSimulationTime.ToAbsoluteDateTime());
+            }
+
+            [Test]
+            // same as before just with timespan
+            public void DateTimeToSimulationTime_ShouldConvertDateTimeToSimulationTime_ThenCompareThemByTimeSpan()
+            {
+                // Arrange
+                DateTime baseDate = new DateTime(2022, 5, 15, 8, 30, 45);
+                SimulationTime simulationTime = new SimulationTime(baseDate);
+
+                var ts = TimeSpan.FromMilliseconds(500);
+
+                // Act
+                DateTime newDateTime = baseDate.Add(ts);
+                SimulationTime newSimulationTime = simulationTime + ts;
+
+                // Assert
+                newDateTime.Should().Be(newSimulationTime.ToAbsoluteDateTime());
+                //Assert.AreEqual(newDateTime, newSimulationTime.ToAbsoluteDateTime());
+            }
+
         }
 
         [Test]
         // check string representation given by ToString
-        public void SimulationTime_ToString()
+        public void SimulationTime_ToStringIsUsed_ThenCheckRepresentaionGivenAsAResult()
         {
-            throw new NotImplementedException();
+            // Arrange
+            DateTime baseDate = new DateTime(2022, 5, 15, 8, 30, 45);
+            SimulationTime simulationTime = new SimulationTime(baseDate);
+            string expectedString = baseDate.ToString("yyyy-MM-ddTHH:mm:ss");
+
+            // Act
+            string result = simulationTime.ToString();
+
+            // Assert
+            result.Should().Be(expectedString);
+            //Assert.AreEqual(expectedString, result);
         }
     }
 }
