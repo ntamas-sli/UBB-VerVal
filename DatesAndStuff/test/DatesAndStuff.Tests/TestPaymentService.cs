@@ -11,10 +11,20 @@ namespace DatesAndStuff.Tests
         uint startCallCount = 0;
         uint specifyCallCount = 0;
         uint confirmCallCount = 0;
+        uint getBalanceCallCount = 0;
+        double balance;
+
+        public TestPaymentService() { 
+            this.balance = 1000;
+        }
+        public TestPaymentService(double balance)
+        {
+            this.balance = balance;
+        }
 
         public void StartPayment()
         {
-            if (startCallCount != 0 || specifyCallCount > 0 || confirmCallCount > 0)
+            if (startCallCount != 0 || specifyCallCount > 0 || confirmCallCount > 0 || getBalanceCallCount > 0)
                 throw new Exception();
 
             startCallCount++;
@@ -22,7 +32,9 @@ namespace DatesAndStuff.Tests
 
         public void SpecifyAmount(double amount)
         {
-            if (startCallCount != 1 || specifyCallCount > 0 || confirmCallCount > 0)
+            if (amount < balance) 
+                throw new Exception();
+            if (startCallCount != 1 || specifyCallCount > 0 || confirmCallCount > 0 || getBalanceCallCount != 1)
                 throw new Exception();
 
             specifyCallCount++;
@@ -30,7 +42,7 @@ namespace DatesAndStuff.Tests
 
         public void ConfirmPayment()
         {
-            if (startCallCount != 1 || specifyCallCount != 1 || confirmCallCount > 0)
+            if (startCallCount != 1 || specifyCallCount != 1 || confirmCallCount > 0 || getBalanceCallCount != 1)
                 throw new Exception();
 
             confirmCallCount++;
@@ -38,7 +50,18 @@ namespace DatesAndStuff.Tests
 
         public bool SuccessFul()
         {
-            return startCallCount == 1 && specifyCallCount == 1 && confirmCallCount == 1;
+            return startCallCount == 1 && specifyCallCount == 1 && confirmCallCount == 1 && getBalanceCallCount == 1;
+        }
+
+        public double GetBalance()
+        {
+            getBalanceCallCount++;
+            return balance;
+        }
+
+        public bool CancelPayment()
+        {
+            return startCallCount != 1 || specifyCallCount != 1 || confirmCallCount != 0 || getBalanceCallCount != 1;
         }
     }
 }
