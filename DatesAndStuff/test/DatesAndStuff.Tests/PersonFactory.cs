@@ -8,7 +8,7 @@ namespace DatesAndStuff.Tests
 {
     internal class PersonFactory
     {
-        public static Person CreateTestPerson()
+        public static Person  CreateTestPerson()
         {
             return CreateTestPerson(fp => { });
         }
