@@ -1,5 +1,4 @@
 ﻿using AutoFixture;
-using AutoFixture.NUnit3;
 using FluentAssertions;
 
 namespace DatesAndStuff.Tests;
@@ -59,7 +58,7 @@ public class PersonTests
         }
     }
 
-    
+
 
     [Test]
     public void Constructor_DefaultParams_ShouldBeAbleToEatChocolate()
@@ -85,7 +84,7 @@ public class PersonTests
         sut.CanEatChocolate.Should().BeFalse();
     }
 
-    
+
 
     public class IncreaseSalaryTests
     {

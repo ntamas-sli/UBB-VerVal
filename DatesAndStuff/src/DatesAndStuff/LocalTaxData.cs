@@ -22,6 +22,7 @@
         public LocalTaxData(string UAT)
         {
             this.UAT = UAT;
+            this.TaxItems = new List<TaxItem>();
         }
     }
 }

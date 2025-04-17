@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace DatesAndStuff.Tests
+﻿namespace DatesAndStuff.Tests
 {
     internal class TestPaymentService : IPaymentService
     {
@@ -14,7 +8,8 @@ namespace DatesAndStuff.Tests
         uint getBalanceCallCount = 0;
         double balance;
 
-        public TestPaymentService() { 
+        public TestPaymentService()
+        {
             this.balance = 1000;
         }
         public TestPaymentService(double balance)
@@ -32,7 +27,7 @@ namespace DatesAndStuff.Tests
 
         public void SpecifyAmount(double amount)
         {
-            if (amount < balance) 
+            if (amount < balance)
                 throw new Exception();
             if (startCallCount != 1 || specifyCallCount > 0 || confirmCallCount > 0 || getBalanceCallCount != 1)
                 throw new Exception();
