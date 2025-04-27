@@ -14,6 +14,10 @@ jobs:
     - name: Kód letöltése
       uses: actions/checkout@v4
 
+    - name: .NET SDK telepítése
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: '8.0.x'
+
     - name: Build futtatása
-      run: |
-        make
+      run: dotnet build
