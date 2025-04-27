@@ -69,6 +69,101 @@ namespace DatesAndStuff.Tests
                 sut1.Should().Be(sut2);
                 //Assert.AreEqual(sut1, sut2);
             }
+            [Test]
+            public void OperatorGreaterThan_ShouldWorkCorrectly()
+            {
+                // Arrange
+                DateTime time1 = new DateTime(2021, 8, 21, 5, 4, 49);
+                DateTime time2 = new DateTime(2020, 8, 21, 5, 4, 49);
+
+                SimulationTime sut1 = new SimulationTime(time1);
+                SimulationTime sut2 = new SimulationTime(time2);
+
+                // Act
+
+                // Assert
+                sut1.Should().BeGreaterThan(sut2);
+            }
+
+            [Test]
+            public void OperatorLessThan_ShouldWorkCorrectly()
+            {
+                // Arrange
+                DateTime time1 = new DateTime(2019, 8, 21, 5, 4, 49);
+                DateTime time2 = new DateTime(2020, 8, 21, 5, 4, 49);
+
+                SimulationTime sut1 = new SimulationTime(time1);
+                SimulationTime sut2 = new SimulationTime(time2);
+
+                // Act
+
+                // Assert
+                sut1.Should().BeLessThan(sut2);
+            }
+
+            [Test]
+            public void OperatorEquals_ShouldWorkCorrectly()
+            {
+                // Arrange
+                DateTime time1 = new DateTime(2020, 8, 21, 5, 4, 49);
+                DateTime time2 = new DateTime(2020, 8, 21, 5, 4, 49);
+
+                SimulationTime sut1 = new SimulationTime(time1);
+                SimulationTime sut2 = new SimulationTime(time2);
+
+                // Act
+
+                // Assert
+                sut1.Should().BeEquivalentTo(sut2);
+            }
+
+            [Test]
+            public void OperatorNotEquals_ShouldWorkCorrectly()
+            {
+                // Arrange
+                DateTime time1 = new DateTime(2019, 8, 21, 5, 4, 49);
+                DateTime time2 = new DateTime(2020, 8, 21, 5, 4, 49);
+
+                SimulationTime sut1 = new SimulationTime(time1);
+                SimulationTime sut2 = new SimulationTime(time2);
+
+                // Act
+
+                // Assert
+                sut1.Should().NotBeRankedEquallyTo(sut2);
+            }
+
+            [Test]
+            public void OperatorGreaterThanOrEqual_ShouldWorkCorrectly()
+            {
+                // Arrange
+                DateTime time1 = new DateTime(2020, 8, 21, 5, 4, 49);
+                DateTime time2 = new DateTime(2020, 8, 21, 5, 4, 49);
+
+                SimulationTime sut1 = new SimulationTime(time1);
+                SimulationTime sut2 = new SimulationTime(time2);
+
+                // Act
+
+                // Assert
+                sut1.Should().BeGreaterThanOrEqualTo(sut2);
+            }
+
+            [Test]
+            public void OperatorLessThanOrEqual_ShouldWorkCorrectly()
+            {
+                // Arrange
+                DateTime time1 = new DateTime(2020, 8, 21, 5, 4, 49);
+                DateTime time2 = new DateTime(2020, 8, 21, 5, 4, 49);
+
+                SimulationTime sut1 = new SimulationTime(time1);
+                SimulationTime sut2 = new SimulationTime(time2);
+
+                // Act
+
+                // Assert
+                sut1.Should().BeLessThanOrEqualTo(sut2);
+            }
         }
 
         private class TimeSpanArithmeticTests
