@@ -19,5 +19,8 @@ jobs:
       with:
         dotnet-version: '8.0.x'
 
+    - name: Formázás ellenőrzése
+      run: dotnet format --verify-no-changes
+
     - name: Build futtatása
       run: dotnet build
