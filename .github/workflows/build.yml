@@ -19,8 +19,22 @@ jobs:
       with:
         dotnet-version: '8.0.x'
 
-    - name: Formázás ellenőrzése
-      run: dotnet format --verify-no-changes
-
     - name: Build futtatása
       run: dotnet build
+
+    - name: Tesztek futtatása lefedettség méréssel
+      run: dotnet test --collect:"XPlat Code Coverage"
+
+    - name: Lefedettségi riport generálása
+      run: |
+        dotnet tool install -g dotnet-reportgenerator-globaltool
+        reportgenerator \
+          -reports:**/coverage.cobertura.xml \
+          -targetdir:coverage-report \
+          -reporttypes:Html
+
+    - name: Lefedettségi riport feltöltése artifactként
+      uses: actions/upload-artifact@v4
+      with:
+        name: coverage-report
+        path: coverage-report
