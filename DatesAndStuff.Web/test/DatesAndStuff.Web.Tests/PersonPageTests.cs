@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Diagnostics;
 using System.Reflection;
 using System.Text;
@@ -109,6 +109,8 @@ namespace DatesAndStuff.Web.Tests
 
             var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(5));
 
+            System.Threading.Thread.Sleep(1000);
+
             string salaryText = string.Empty;
             int attempts = 0;
 
@@ -144,6 +146,34 @@ namespace DatesAndStuff.Web.Tests
             var expectedSalary = initialSalary * (100 + salaryIncreasePercentage) / 100;
             salaryAfterSubmission.Should().BeApproximately(expectedSalary, 0.001);
         }
+
+        [Test]
+        public void Person_SalaryIncrease_ShouldShowErrors_WhenBelowMinimum()
+        {
+            // Arrange
+            string path = BaseURL + "/person";
+            driver.Navigate().GoToUrl(path);
+
+            var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(5));
+
+            System.Threading.Thread.Sleep(1000);
+            // Megkeressük az input mezőt, töröljük és -15-öt írunk be
+            var input = wait.Until(ExpectedConditions.ElementExists(By.XPath("//*[@data-test='SalaryIncreasePercentageInput']")));
+            input.Clear();
+            input.SendKeys("-15");
+
+            // Act
+            var submitButton = wait.Until(ExpectedConditions.ElementToBeClickable(By.XPath("//*[@data-test='SalaryIncreaseSubmitButton']")));
+            submitButton.Click();
+
+            // Assert
+            var topError = wait.Until(ExpectedConditions.ElementIsVisible(By.XPath("//*[@data-test='SalaryIncreaseTopError']")));
+            topError.Text.Should().NotBeNullOrEmpty();
+
+            var inputError = wait.Until(ExpectedConditions.ElementIsVisible(By.XPath("//*[@data-test='SalaryIncreaseBottomError']")));
+            inputError.Text.Should().NotBeNullOrEmpty();
+        }
+
         private bool IsElementPresent(By by)
         {
             try
