@@ -14,11 +14,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Nagy Tamás\\Downloads\\VerVal-szemi4\\VerVal\\DatesAndStuff\\src\\DatesAndStuff\\DatesAndStuff.csproj",
+      "projectUniqueName": "C:\\OtherStuff\\UBB 3.2\\VerVal\\Lab1\\UBB-VerVal\\DatesAndStuff\\src\\DatesAndStuff\\DatesAndStuff.csproj",
       "projectName": "DatesAndStuff",
-      "projectPath": "C:\\Users\\Nagy Tamás\\Downloads\\VerVal-szemi4\\VerVal\\DatesAndStuff\\src\\DatesAndStuff\\DatesAndStuff.csproj",
+      "projectPath": "C:\\OtherStuff\\UBB 3.2\\VerVal\\Lab1\\UBB-VerVal\\DatesAndStuff\\src\\DatesAndStuff\\DatesAndStuff.csproj",
       "packagesPath": "C:\\Users\\Nagy Tamás\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Nagy Tamás\\Downloads\\VerVal-szemi4\\VerVal\\DatesAndStuff\\src\\DatesAndStuff\\obj\\",
+      "outputPath": "C:\\OtherStuff\\UBB 3.2\\VerVal\\Lab1\\UBB-VerVal\\DatesAndStuff\\src\\DatesAndStuff\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

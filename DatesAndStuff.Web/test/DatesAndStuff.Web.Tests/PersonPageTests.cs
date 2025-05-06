@@ -100,18 +100,38 @@ namespace DatesAndStuff.Web.Tests
         [TestCase(10)]
         [TestCase(0)]
         [TestCase(-5)]
-        [TestCase(-10)]
-        public void Person_SalaryIncrease_ShouldIncrease(double IncreasePrecent)
+        [TestCase(-9)]
+        public void Person_SalaryIncrease_ShouldIncrease(double salaryIncreasePercentage)
         {
             // Arrange
-            driver.Navigate().GoToUrl(BaseURL);
-            driver.FindElement(By.XPath("//*[@data-test='PersonPageNavigation']")).Click();
+            String path = BaseURL + "/person";
+            driver.Navigate().GoToUrl(path);
 
             var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(5));
 
+            string salaryText = string.Empty;
+            int attempts = 0;
+
+            while (attempts < 3)
+            {
+                try
+                {
+                    var displayedSalary = wait.Until(ExpectedConditions.ElementExists(By.XPath("//*[@data-test='DisplayedSalary']")));
+                    salaryText = displayedSalary.Text;
+                    break;
+                }
+                catch (StaleElementReferenceException)
+                {
+                    attempts++;
+                }
+            }
+
+            var initialSalary = double.Parse(salaryText);
+
+
             var input = wait.Until(ExpectedConditions.ElementExists(By.XPath("//*[@data-test='SalaryIncreasePercentageInput']")));
             input.Clear();
-            input.SendKeys("5");
+            input.SendKeys(salaryIncreasePercentage.ToString());
 
             // Act
             var submitButton = wait.Until(ExpectedConditions.ElementExists(By.XPath("//*[@data-test='SalaryIncreaseSubmitButton']")));
@@ -121,7 +141,8 @@ namespace DatesAndStuff.Web.Tests
             // Assert
             var salaryLabel = wait.Until(ExpectedConditions.ElementExists(By.XPath("//*[@data-test='DisplayedSalary']")));
             var salaryAfterSubmission = double.Parse(salaryLabel.Text);
-            salaryAfterSubmission.Should().BeApproximately(5250, 0.001);
+            var expectedSalary = initialSalary * (100 + salaryIncreasePercentage) / 100;
+            salaryAfterSubmission.Should().BeApproximately(expectedSalary, 0.001);
         }
         private bool IsElementPresent(By by)
         {
