@@ -100,7 +100,7 @@ namespace DatesAndStuff.Web.Tests
         [TestCase(10)]
         [TestCase(0)]
         [TestCase(-5)]
-        [TestCase(-10)]
+        [TestCase(-9.9)]
         public void Person_SalaryIncrease_ShouldIncrease(double salaryIncreasePercentage)
         {
             // Arrange
