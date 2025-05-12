@@ -3,10 +3,12 @@ using System.Diagnostics;
 using System.Reflection;
 using System.Text;
 using FluentAssertions;
+using NUnit.Framework.Internal;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Support.UI;
 using SeleniumExtras.WaitHelpers;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace DatesAndStuff.Web.Tests
 {
@@ -16,6 +18,7 @@ namespace DatesAndStuff.Web.Tests
         private IWebDriver driver;
         private StringBuilder verificationErrors;
         private const string BaseURL = "http://localhost:5091";
+        private const string WizzURL = "https://www.wizzair.com/en-gb";
         private bool acceptNextAlert = true;
 
         private Process? _blazorProcess;
@@ -104,7 +107,7 @@ namespace DatesAndStuff.Web.Tests
         public void Person_SalaryIncrease_ShouldIncrease(double salaryIncreasePercentage)
         {
             // Arrange
-            String path = BaseURL + "/person";
+            string path = BaseURL + "/person";
             driver.Navigate().GoToUrl(path);
 
             var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(5));
@@ -156,7 +159,7 @@ namespace DatesAndStuff.Web.Tests
 
             var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(5));
 
-            System.Threading.Thread.Sleep(1000);
+            System.Threading.Thread.Sleep(2000);
             var input = wait.Until(ExpectedConditions.ElementExists(By.XPath("//*[@data-test='SalaryIncreasePercentageInput']")));
             input.Clear();
             input.SendKeys("-10");
@@ -222,6 +225,107 @@ namespace DatesAndStuff.Web.Tests
             {
                 acceptNextAlert = true;
             }
+        }
+
+        [Test]
+        public void Person_CheckFlight_ShouldbeTrue()
+        {
+            var options = new ChromeOptions();
+
+            options.AddArgument("--lang=en-US");
+
+            options.AddArgument("user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) " +
+                    "AppleWebKit/537.36 (KHTML, like Gecko) " +
+                    "Chrome/114.0.5735.110 Safari/537.36");
+
+            options.AddExcludedArgument("enable-automation");
+            options.AddAdditionalOption("useAutomationExtension", false);
+
+            options.AddArgument("--disable-blink-features=AutomationControlled");
+            options.AddArgument("--window-size=1920,1080");
+
+            driver = new ChromeDriver(options);
+
+            driver.Navigate().GoToUrl(WizzURL);
+
+            var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(5));
+
+            System.Threading.Thread.Sleep(8000);
+            var input = wait.Until(ExpectedConditions.ElementExists(By.XPath("/ html / body / div[7] / div[2] / div / div[2] / div[1] / div / div[2] / div / div[1] / button")));
+            input.Click();
+            
+            System.Threading.Thread.Sleep(2000);
+            input = wait.Until(ExpectedConditions.ElementExists(By.XPath("//*[@data-test='search-departure-station']")));
+            input.Clear();
+            input.SendKeys("TGM");
+            System.Threading.Thread.Sleep(2000);
+            input.SendKeys(Keys.Enter);
+            
+            System.Threading.Thread.Sleep(2000);
+            input = wait.Until(ExpectedConditions.ElementExists(By.XPath("//*[@data-test='search-arrival-station']")));
+            input.Clear();
+            input.SendKeys("BUD");
+            System.Threading.Thread.Sleep(2000);
+            input.SendKeys(Keys.Enter);
+            System.Threading.Thread.Sleep(2000);
+            input = wait.Until(ExpectedConditions.ElementExists(By.XPath("/html/body/div[1]/div/main/div/div/div[1]/div[1]/div[1]/div[2]/div/div[2]/div/div[1]/form/div/fieldset[2]/div/div[1]/div[2]/div/input")));
+            input.Click();
+            System.Threading.Thread.Sleep(1500);
+
+            DateTime today = DateTime.Today;
+
+            bool startingDayFound = false;
+            bool endDayFound = false;
+            DateTime startDate = today;
+            DateTime endDate = today;
+            string dateXPath = "";
+
+            for(DateTime t = today.AddDays(1); t <= today.AddDays(7); t = t.AddDays(1))
+            {
+                string day = t.Day.ToString();
+                string month = t.ToString("MMMM");
+                string year = t.Year.ToString();
+                string dayName = t.DayOfWeek.ToString();
+
+                string xPathstring = "//*[@aria-label='" + dayName + " " + day + " " + month + " " + year + "']";
+
+                var button = wait.Until(ExpectedConditions.ElementExists(By.XPath(xPathstring)));
+
+                if (!startingDayFound)
+                {
+                    string classAttr = button.GetAttribute("class");
+
+                    if (classAttr != null && classAttr.Contains("vc-custom-start"))
+                    {
+                        startingDayFound = true;
+                        startDate = t;
+                    }
+                } else
+                {
+                    string ariaLabelAttr = button.GetAttribute("aria-disabled");
+                    if (ariaLabelAttr != null && ariaLabelAttr == "false")
+                    {
+                        endDayFound = true;
+                        endDate = t;
+                        dateXPath = xPathstring;
+                    }
+                }
+            }
+            System.Threading.Thread.Sleep(2000);
+            input = wait.Until(ExpectedConditions.ElementExists(By.XPath(dateXPath)));
+            //*[@id="popper-panel-12"]
+            input.Click();
+            System.Threading.Thread.Sleep(1000);
+            input = wait.Until(ExpectedConditions.ElementExists(By.XPath("//*[@data-test='flight-search-submit']")));
+            input.Click();
+            //*[@id="popper-panel-14"]/div/div[2]/div[1]/div/div[2]/div[24]/span
+            Console.Write(input.ToString());
+
+            (startingDayFound && endDayFound).Should().BeTrue();
+
+
+            driver.Quit();
+            driver.Dispose();
         }
     }
 }
