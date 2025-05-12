@@ -232,45 +232,66 @@ namespace DatesAndStuff.Web.Tests
         {
             var options = new ChromeOptions();
 
+            Random rand = new Random();
+            int delay = rand.Next(1000, 2500);
+            
             options.AddArgument("--lang=en-US");
 
             options.AddArgument("user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) " +
                     "AppleWebKit/537.36 (KHTML, like Gecko) " +
                     "Chrome/114.0.5735.110 Safari/537.36");
 
+            options.AddArgument("--disable-blink-features=AutomationControlled");
             options.AddExcludedArgument("enable-automation");
             options.AddAdditionalOption("useAutomationExtension", false);
 
-            options.AddArgument("--disable-blink-features=AutomationControlled");
             options.AddArgument("--window-size=1920,1080");
 
             driver = new ChromeDriver(options);
 
             driver.Navigate().GoToUrl(WizzURL);
 
+            ((IJavaScriptExecutor)driver).ExecuteScript("Object.defineProperty(navigator, 'webdriver', {get: () => undefined})");
+
             var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(5));
 
             System.Threading.Thread.Sleep(8000);
             var input = wait.Until(ExpectedConditions.ElementExists(By.XPath("/ html / body / div[7] / div[2] / div / div[2] / div[1] / div / div[2] / div / div[1] / button")));
             input.Click();
-            
-            System.Threading.Thread.Sleep(2000);
+
+            delay = rand.Next(1000, 2500);
+            Thread.Sleep(delay);
             input = wait.Until(ExpectedConditions.ElementExists(By.XPath("//*[@data-test='search-departure-station']")));
             input.Clear();
-            input.SendKeys("TGM");
-            System.Threading.Thread.Sleep(2000);
+            foreach (char c in "TGM")
+            {
+                input.SendKeys(c.ToString());
+                delay = rand.Next(100, 250);
+                Thread.Sleep(delay);
+            }
+            delay = rand.Next(1000, 2500);
+            Thread.Sleep(delay);
             input.SendKeys(Keys.Enter);
-            
-            System.Threading.Thread.Sleep(2000);
+
+            delay = rand.Next(1000, 2500);
+            Thread.Sleep(delay);
             input = wait.Until(ExpectedConditions.ElementExists(By.XPath("//*[@data-test='search-arrival-station']")));
             input.Clear();
-            input.SendKeys("BUD");
-            System.Threading.Thread.Sleep(2000);
+            foreach (char c in "BUD")
+            {
+                input.SendKeys(c.ToString());
+                delay = rand.Next(100, 250);
+                Thread.Sleep(delay);
+            }
+            delay = rand.Next(1000, 2500);
+            Thread.Sleep(delay);
             input.SendKeys(Keys.Enter);
-            System.Threading.Thread.Sleep(2000);
+            delay = rand.Next(1000, 2500);
+            Thread.Sleep(delay);
             input = wait.Until(ExpectedConditions.ElementExists(By.XPath("/html/body/div[1]/div/main/div/div/div[1]/div[1]/div[1]/div[2]/div/div[2]/div/div[1]/form/div/fieldset[2]/div/div[1]/div[2]/div/input")));
             input.Click();
-            System.Threading.Thread.Sleep(1500);
+            delay = rand.Next(1000, 2500);
+            Thread.Sleep(delay);
 
             DateTime today = DateTime.Today;
 
@@ -282,6 +303,8 @@ namespace DatesAndStuff.Web.Tests
 
             for(DateTime t = today.AddDays(1); t <= today.AddDays(7); t = t.AddDays(1))
             {
+                delay = rand.Next(1000, 2500);
+                Thread.Sleep(delay);
                 string day = t.Day.ToString();
                 string month = t.ToString("MMMM");
                 string year = t.Year.ToString();
@@ -311,11 +334,13 @@ namespace DatesAndStuff.Web.Tests
                     }
                 }
             }
-            System.Threading.Thread.Sleep(2000);
+            delay = rand.Next(1000, 2500);
+            Thread.Sleep(delay);
             input = wait.Until(ExpectedConditions.ElementExists(By.XPath(dateXPath)));
             //*[@id="popper-panel-12"]
             input.Click();
-            System.Threading.Thread.Sleep(1000);
+            delay = rand.Next(1000, 2500);
+            Thread.Sleep(delay);
             input = wait.Until(ExpectedConditions.ElementExists(By.XPath("//*[@data-test='flight-search-submit']")));
             input.Click();
             //*[@id="popper-panel-14"]/div/div[2]/div[1]/div/div[2]/div[24]/span
