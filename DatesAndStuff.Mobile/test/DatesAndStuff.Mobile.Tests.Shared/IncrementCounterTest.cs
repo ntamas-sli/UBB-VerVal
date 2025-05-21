@@ -102,6 +102,8 @@ namespace DatesAndStuff.Mobile.Tests
         {
             var random = new Random();
 
+            App.StartRecordingScreen();
+
             var mainMenu = App.FindElement(MobileBy.XPath("(//android.widget.ImageView[@resource-id=\"ro.jerryspizza.android:id/image\"])[3]"));
             mainMenu.Click();
 
@@ -140,7 +142,11 @@ namespace DatesAndStuff.Mobile.Tests
             var sendOrder = App.FindElement(MobileBy.XPath("//android.widget.Button[@resource-id=\"ro.jerryspizza.android:id/sendOrder\"]"));
             sendOrder.Click();
 
-            Thread.Sleep(random.Next(400, 800));
+            Thread.Sleep(random.Next(500, 1000));
+
+            string base64Video = App.StopRecordingScreen();
+
+            File.WriteAllBytes("JerrysPizzaOrder.mp4", Convert.FromBase64String(base64Video));
 
             var errorBox = App.FindElement(MobileBy.XPath("//android.widget.TextView[@resource-id=\"ro.jerryspizza.android:id/snackbar_text\"]"));
             errorBox.Text.Should().Be("Please select a payment method");
