@@ -2,6 +2,7 @@
 using OpenQA.Selenium;
 using OpenQA.Selenium.Appium;
 using OpenQA.Selenium.Support.UI;
+using System;
 
 namespace DatesAndStuff.Mobile.Tests
 {
@@ -94,6 +95,55 @@ namespace DatesAndStuff.Mobile.Tests
             // Assert
             var inputError = FindUIElement("InputError");
             inputError.Text.Should().NotBeNullOrEmpty();
+        }
+
+        [Test]
+        public void JerrysPizza_ShouldOrderPizza()
+        {
+            var random = new Random();
+
+            var mainMenu = App.FindElement(MobileBy.XPath("(//android.widget.ImageView[@resource-id=\"ro.jerryspizza.android:id/image\"])[3]"));
+            mainMenu.Click();
+
+            Thread.Sleep(random.Next(500, 2000));
+
+            var pizzaItem = App.FindElement(MobileBy.XPath("//android.widget.TextView[@resource-id=\"ro.jerryspizza.android:id/name\" and @text=\"Pizza Texas\"]"));
+            pizzaItem.Click();
+
+            Thread.Sleep(random.Next(500, 2000));
+
+            var crustOption = App.FindElement(MobileBy.XPath("//android.widget.TextView[@resource-id=\"ro.jerryspizza.android:id/name\" and @text=\"Normal crust\"]"));
+            crustOption.Click();
+
+            Thread.Sleep(random.Next(500, 2000));
+
+            var sosOption = App.FindElement(MobileBy.XPath("(//androidx.cardview.widget.CardView[@resource-id=\"ro.jerryspizza.android:id/cardView\"])[7]/android.view.ViewGroup/android.view.ViewGroup"));
+            sosOption.Click();
+
+            Thread.Sleep(random.Next(500, 2000));
+            
+            var addToCart = App.FindElement(MobileBy.XPath("//android.widget.Button[@resource-id=\"ro.jerryspizza.android:id/addToCart\"]"));
+            addToCart.Click();
+
+            Thread.Sleep(random.Next(500, 2000));
+
+            var cart = App.FindElement(MobileBy.XPath("//android.widget.FrameLayout[@resource-id=\"ro.jerryspizza.android:id/cart\"]/android.widget.ImageView"));
+            cart.Click();
+
+            Thread.Sleep(random.Next(500, 2000));
+
+            var continueBtn = App.FindElement(MobileBy.XPath("//android.widget.Button[@resource-id=\"ro.jerryspizza.android:id/openCheckout\"]"));
+            continueBtn.Click();
+
+            Thread.Sleep(random.Next(500, 2000));
+
+            var sendOrder = App.FindElement(MobileBy.XPath("//android.widget.Button[@resource-id=\"ro.jerryspizza.android:id/sendOrder\"]"));
+            sendOrder.Click();
+
+            Thread.Sleep(random.Next(400, 800));
+
+            var errorBox = App.FindElement(MobileBy.XPath("//android.widget.TextView[@resource-id=\"ro.jerryspizza.android:id/snackbar_text\"]"));
+            errorBox.Text.Should().Be("Please select a payment method");
         }
     }
 }
