@@ -1,5 +1,7 @@
 ﻿using FluentAssertions;
+using OpenQA.Selenium;
 using OpenQA.Selenium.Appium;
+using OpenQA.Selenium.Support.UI;
 
 namespace DatesAndStuff.Mobile.Tests
 {
@@ -35,6 +37,63 @@ namespace DatesAndStuff.Mobile.Tests
 
             // Assert
             updatedCount.Should().Be(originalCount + 1);
+        }
+
+        [TestCase(10)]
+        [TestCase(0)]
+        [TestCase(-5)]
+        [TestCase(-9.9)]
+        public void Person_SalaryIncrease_ShouldIncrease(double salaryIncreasePercentage)
+        {
+            // Arrange
+
+            // navigate to the person page
+            var drawer = App.FindElement(MobileBy.XPath("//android.widget.ImageButton[@content-desc=\"Open navigation drawer\"]"));
+            drawer.Click();
+            var personMenu = App.FindElement(MobileBy.XPath("//android.widget.TextView[@text=\"Person\"]"));
+            personMenu.Click();
+
+            var salaryDisplay = FindUIElement("SalaryDisplay");
+            var displayedSalary = salaryDisplay.Text;
+            var initialSalary = double.Parse(displayedSalary);
+
+            var input = FindUIElement("PrecentInput");
+            input.Clear();
+            input.SendKeys(salaryIncreasePercentage.ToString());
+
+            // Act
+            var submitButton = App.FindElement(MobileBy.XPath("//android.widget.Button[@text=\"Submit\"]"));
+            submitButton.Click();
+
+
+            // Assert
+            var salaryLabel = FindUIElement("SalaryDisplay");
+            var salaryAfterSubmission = double.Parse(salaryLabel.Text);
+            var expectedSalary = initialSalary * (100 + salaryIncreasePercentage) / 100;
+            salaryAfterSubmission.Should().BeApproximately(expectedSalary, 0.001);
+        }
+
+        [Test]
+        public void Person_SalaryIncrease_ShouldShowErrors_WhenBelowMinimum()
+        {
+            // Arrange
+
+            
+            // navigate to the person page
+            var drawer = App.FindElement(MobileBy.XPath("//android.widget.ImageButton[@content-desc=\"Open navigation drawer\"]"));
+            drawer.Click();
+            var personMenu = App.FindElement(MobileBy.XPath("//android.widget.TextView[@text=\"Person\"]"));
+            personMenu.Click();
+
+            var input = FindUIElement("PrecentInput");
+            input.Clear();
+            input.SendKeys("-10");
+
+            // Act
+        
+            // Assert
+            var inputError = FindUIElement("InputError");
+            inputError.Text.Should().NotBeNullOrEmpty();
         }
     }
 }

@@ -1,0 +1,8 @@
+{
+    "platformName": "Android",
+    "appium:deviceName": "emulator-5554",
+    "appium:appPackage": "com.BBTE.VerVal",
+    "appium:appActivity": "com.BBTE.VerVal.MainActivity",
+    "appium:automationName": "UiAutomator2",
+    "appium:noReset": true
+}

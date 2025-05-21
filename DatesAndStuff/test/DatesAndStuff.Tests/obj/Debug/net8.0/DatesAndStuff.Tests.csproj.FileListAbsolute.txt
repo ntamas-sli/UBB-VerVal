@@ -224,8 +224,8 @@ C:\OtherStuff\UBB 3.2\VerVal\Lab1\UBB-VerVal\DatesAndStuff\test\DatesAndStuff.Te
 C:\OtherStuff\UBB 3.2\VerVal\Lab1\UBB-VerVal\DatesAndStuff\test\DatesAndStuff.Tests\obj\Debug\net8.0\DatesAndStuff.Tests.genruntimeconfig.cache
 C:\OtherStuff\UBB 3.2\VerVal\Lab1\UBB-VerVal\DatesAndStuff\test\DatesAndStuff.Tests\obj\Debug\net8.0\ref\DatesAndStuff.Tests.dll
 C:\OtherStuff\UBB 3.2\VerVal\Lab5\UBB-VerVal\DatesAndStuff\test\DatesAndStuff.Tests\bin\Debug\net8.0\CoverletSourceRootsMapping_DatesAndStuff.Tests
-C:\OtherStuff\UBB 3.2\VerVal\Lab5\UBB-VerVal\DatesAndStuff\test\DatesAndStuff.Tests\bin\Debug\net8.0\testhost.dll
 C:\OtherStuff\UBB 3.2\VerVal\Lab5\UBB-VerVal\DatesAndStuff\test\DatesAndStuff.Tests\bin\Debug\net8.0\testhost.exe
+C:\OtherStuff\UBB 3.2\VerVal\Lab5\UBB-VerVal\DatesAndStuff\test\DatesAndStuff.Tests\bin\Debug\net8.0\testhost.dll
 C:\OtherStuff\UBB 3.2\VerVal\Lab5\UBB-VerVal\DatesAndStuff\test\DatesAndStuff.Tests\bin\Debug\net8.0\NUnit3.TestAdapter.dll
 C:\OtherStuff\UBB 3.2\VerVal\Lab5\UBB-VerVal\DatesAndStuff\test\DatesAndStuff.Tests\bin\Debug\net8.0\NUnit3.TestAdapter.pdb
 C:\OtherStuff\UBB 3.2\VerVal\Lab5\UBB-VerVal\DatesAndStuff\test\DatesAndStuff.Tests\bin\Debug\net8.0\nunit.engine.dll

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Diagnostics;
 using System.Reflection;
 using System.Text;
@@ -176,7 +176,7 @@ namespace DatesAndStuff.Web.Tests
             inputError.Text.Should().NotBeNullOrEmpty();
         }
 
-        
+
 
 
         private bool IsElementPresent(By by)
@@ -234,7 +234,7 @@ namespace DatesAndStuff.Web.Tests
 
             Random rand = new Random();
             int delay = rand.Next(1000, 2500);
-            
+
             options.AddArgument("--lang=en-US");
 
             options.AddArgument("user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) " +
@@ -301,7 +301,7 @@ namespace DatesAndStuff.Web.Tests
             DateTime endDate = today;
             string dateXPath = "";
 
-            for(DateTime t = today.AddDays(1); t <= today.AddDays(7); t = t.AddDays(1))
+            for (DateTime t = today.AddDays(1); t <= today.AddDays(7); t = t.AddDays(1))
             {
                 delay = rand.Next(1000, 2500);
                 Thread.Sleep(delay);
@@ -323,7 +323,8 @@ namespace DatesAndStuff.Web.Tests
                         startingDayFound = true;
                         startDate = t;
                     }
-                } else
+                }
+                else
                 {
                     string ariaLabelAttr = button.GetAttribute("aria-disabled");
                     if (ariaLabelAttr != null && ariaLabelAttr == "false")
